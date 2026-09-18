@@ -1,0 +1,27 @@
+{
+  "name": "pool-table-store-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "qa": "node scripts/qa.mjs"
+  },
+  "dependencies": {
+    "next": "^16.3.5",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.0",
+    "@types/node": "22.10.0",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "eslint": "9.17.0",
+    "eslint-config-next": "^16.3.5",
+    "typescript": "5.7.2"
+  }
+}
