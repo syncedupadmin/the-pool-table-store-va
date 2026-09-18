@@ -2,6 +2,7 @@ import { chromium } from "@playwright/test";
 
 const baseURL = process.env.QA_BASE_URL ?? "http://localhost:3000";
 const widths = [320, 390, 430, 768, 1440];
+const routes = ["/", "/tables", "/services", "/restoration", "/about", "/contact"];
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
 const errors = [];
@@ -13,6 +14,12 @@ for (const width of widths) {
   const result = await page.evaluate(() => ({ overflow: document.documentElement.scrollWidth > window.innerWidth + 1, h1: Boolean(document.querySelector("h1")), nav: Boolean(document.querySelector("nav")), images: [...document.images].filter((image) => image.currentSrc && (!image.complete || image.naturalWidth === 0)).length, tel: [...document.querySelectorAll('a[href^="tel:"]')].length }));
   if (result.overflow) errors.push(`${width}px horizontal overflow`);
   if (!result.h1 || !result.nav || result.images || !result.tel) errors.push(`${width}px structure ${JSON.stringify(result)}`);
+}
+for (const route of routes) {
+  await page.goto(`${baseURL}${route}`, { waitUntil: "networkidle" });
+  const routeResult = await page.evaluate(() => ({ title: document.title, h1: Boolean(document.querySelector("h1")), robots: document.querySelector('meta[name="robots"]')?.getAttribute("content"), links: [...document.querySelectorAll('a[href^="/"]')].map((a) => a.getAttribute("href")).filter(Boolean) }));
+  if (!routeResult.h1 || !routeResult.title || !routeResult.robots?.includes("noindex")) errors.push(`${route} route metadata/heading ${JSON.stringify(routeResult)}`);
+  for (const href of [...new Set(routeResult.links)]) { const response = await page.request.get(`${baseURL}${href}`); if (!response.ok()) errors.push(`${route} link ${href} returned ${response.status()}`); }
 }
 for (const path of ["/robots.txt", "/sitemap.xml", "/opengraph-image", "/icon"]) { const response = await page.request.get(`${baseURL}${path}`); if (!response.ok()) errors.push(`${path} returned ${response.status()}`); }
 await page.goto(baseURL, { waitUntil: "networkidle" });

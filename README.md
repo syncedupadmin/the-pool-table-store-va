@@ -35,3 +35,12 @@ npm run qa
 ```
 
 This demo includes `noindex` metadata, `robots.txt` disallow rules, a generated 1200×630 OG image, and an icon route. It has not been connected to GitHub, Vercel, DNS, or production booking systems.
+
+## Routes
+
+- `/` — specialist overview
+- `/tables` — sales and selection guidance without invented inventory or prices
+- `/services` — moving, recovering, repair, leveling, rails, cushions, and pockets
+- `/restoration` — antique and sentimental table restoration
+- `/about` — official business positioning and Alexandria showroom context
+- `/contact` — phone/text-only contact, official address, hours, and service area
