@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pool-table-store-demo.vercel.app"),
+  metadataBase: new URL("https://the-pool-table-store-va.vercel.app"),
   title: { default: "The Pool Table Store | Alexandria, VA", template: "%s | The Pool Table Store" },
   description: "Pool table sales, moving, recovery, repair, and restoration in Alexandria and Northern Virginia.",
   alternates: { canonical: "/" },

@@ -1,3 +1,3 @@
 import type { MetadataRoute } from "next";
 
-export default function robots(): MetadataRoute.Robots { return { rules: [{ userAgent: "*", disallow: "/" }], sitemap: "https://pool-table-store-demo.vercel.app/sitemap.xml" }; }
+export default function robots(): MetadataRoute.Robots { return { rules: [{ userAgent: "*", disallow: "/" }], sitemap: "https://the-pool-table-store-va.vercel.app/sitemap.xml" }; }
